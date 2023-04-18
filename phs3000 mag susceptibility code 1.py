@@ -21,7 +21,6 @@ calibration_x = calibration[:,0]
 calibration_u_x = calibration[:,1]
 calibration_y = calibration[:,2]*10**-3
 calibration_u_y = calibration[:,3]*10**-3
-print(calibration_y)
 
 plt.figure(1)
 plt.title("Calibration of relationship between current and magnetic field")
@@ -49,6 +48,29 @@ plt.legend(bbox_to_anchor=(1,1))
 
 calibration_fit_parameters=spa.get_fit_parameters(calibration_fit_results)
 print(calibration_fit_parameters)
+
+
+cwd = os.getcwd()
+filename = "mag_suscept_glass.csv"
+glass = np.array(pandas.read_csv(cwd + "\\" + filename))
+print(glass)
+glass_x = glass[:,0]
+glass_u_x = glass[:,1]
+glass_y = glass[:,2]
+glass_u_y = glass[:,3]
+
+plt.figure(3)
+plt.title("Change of measured mass of the glass testing tube")
+plt.errorbar(glass_x, glass_y, xerr=glass_u_x, yerr=glass_u_y, marker="o", markersize = "2", linestyle ='none',capsize=2, label = "Mass and magnetic field data for glass testing tube")
+plt.xlabel("Magnetic Field (T)")
+plt.ylabel("Mass (kg)")
+plt.legend(bbox_to_anchor=(1,1)) 
+
+
+
+
+
+
 
 
 
